@@ -11,14 +11,12 @@ import us.codecraft.webmagic.processor.PageProcessor;
  * @Copyright (c) 2015, hunantv.com All Rights Reserved.
  * @author: wuxinyong@e.hunantv.com
  * @date: 16-7-4
- * @time: 下午10:36
  */
 public class GithubRepoPageProcessor implements PageProcessor {
 
-    private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
+    private Site site = Site.me().setRetryTimes(3).setSleepTime(100).addHeader("X-Requested-With", "XMLHttpRequest").addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
 
-    @Override
     public void process(Page page) {
         page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/\\w+/\\w+)").all());
         page.putField("author", page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
@@ -35,14 +33,13 @@ public class GithubRepoPageProcessor implements PageProcessor {
     }
 
 
-    @Override
     public Site getSite() {
         return site;
     }
 
     public static void main(String[] args) {
-        Spider.create(new GithubRepoPageProcessor()).addUrl("https://github.com/code4craft")
-                .addPipeline(new JsonFilePipeline("/Users/wuxinyong/myworkspace/webmagic_test"))
+        Spider.create(new GithubRepoPageProcessor()).addUrl("http://szjw.changsha.gov.cn/index.php/home/Index/getnewslist/")
+                .addPipeline(new JsonFilePipeline("D:/webmagic_test"))
                 .thread(5)
                 .run();
     }
