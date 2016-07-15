@@ -26,7 +26,7 @@ public class HousePageProcessor implements PageProcessor {
 					"application/x-www-form-urlencoded; charset=UTF-8");
 
 	public void process(Page page) {
-		System.out.println(page.getRawText());
+//		System.out.println(page.getRawText());
 		page.putField("content", page.getRawText());
 		page.putField("name", page.getHtml().xpath("//table//tr/td/text()").toString());
 		System.out.println(page.getHtml().toString());
@@ -41,8 +41,8 @@ public class HousePageProcessor implements PageProcessor {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void main(String[] args) {
 		Spider spider = Spider.create(new HousePageProcessor());
-		Request[] requests = new Request[1];
-		for (int i = 1; i <= 1; i++) {
+		Request[] requests = new Request[3];
+		for (int i = 1; i <= 3; i++) {
 			Request request = new Request(
 					"http://szjw.changsha.gov.cn/index.php/home/Index/getnewslist/");
 			Map nameValuePair = new HashMap();
@@ -56,7 +56,9 @@ public class HousePageProcessor implements PageProcessor {
 		}
 		spider.setScheduler(new QueueScheduler().setDuplicateRemover(new LocalDuplicateRemover()));
 		spider.addRequest(requests);
-		spider.addPipeline(new JsonFilePipeline("D:/house_crawler")).thread(5)
+//		spider.addPipeline(new JsonFilePipeline("/Users/wuxinyong/house_crawler")).thread(5)
+//				.run();
+        spider.addPipeline(new LocalPipeline()).thread(5)
 				.run();
 	}
 }
