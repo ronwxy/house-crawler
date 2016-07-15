@@ -1,5 +1,6 @@
-package com.ray.crawler.house;
+package com.ray.crawler.house.crawler;
 
+import com.ray.crawler.house.crawler.HousePageProcessor;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 

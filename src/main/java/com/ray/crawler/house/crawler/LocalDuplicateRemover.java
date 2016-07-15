@@ -1,4 +1,4 @@
-package com.ray.crawler.house;
+package com.ray.crawler.house.crawler;
 
 import java.util.ArrayList;
 import java.util.List;

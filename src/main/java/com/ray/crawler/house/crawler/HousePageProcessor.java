@@ -1,4 +1,4 @@
-package com.ray.crawler.house;
+package com.ray.crawler.house.crawler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,6 @@ import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.QueueScheduler;
 import us.codecraft.webmagic.utils.HttpConstant;
@@ -28,10 +27,7 @@ public class HousePageProcessor implements PageProcessor {
 	public void process(Page page) {
 //		System.out.println(page.getRawText());
 		page.putField("content", page.getRawText());
-		page.putField("name", page.getHtml().xpath("//table//tr/td/text()").toString());
-		System.out.println(page.getHtml().toString());
-		System.out.println(page.getHtml().xpath("//td"));
-		System.out.println(new String(page.getResultItems().get("name")));
+
 	}
 
 	public Site getSite() {

@@ -1,4 +1,4 @@
-package com.ray.crawler.house.downloader;
+package com.ray.crawler.house.crawler.downloader;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Request;
@@ -11,7 +11,7 @@ import us.codecraft.webmagic.downloader.AbstractDownloader;
  * @date: 16-7-5
  * @time: 下午11:38
  */
-public class CommunityDownloader extends AbstractDownloader{
+public class HouseDownloader extends AbstractDownloader{
     @Override
     public Page download(Request request, Task task) {
         return null;

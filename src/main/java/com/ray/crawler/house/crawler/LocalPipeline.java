@@ -1,4 +1,4 @@
-package com.ray.crawler.house;
+package com.ray.crawler.house.crawler;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -20,17 +21,21 @@ import java.util.UUID;
  */
 public class LocalPipeline implements Pipeline {
 
-    @Override
     public void process(ResultItems resultItems, Task task) {
         String path = UUID.randomUUID().toString();
 
-        try {
-            PrintWriter e = new PrintWriter(new FileWriter(new File( "/Users/wuxinyong/" + path +".json")));
-            e.write(JSON.toJSONString(resultItems.getAll()));
-            e.close();
-        } catch (IOException var5) {
+//        try {
+            String content = resultItems.get("content");
+        Map<String, String> jsonMap = (Map<String, String>) JSON.parse(content);
+        String tableContent = jsonMap.get("content");
 
-        }
-        System.out.println(JSON.toJSONString(resultItems.getAll()));
+            System.out.println(tableContent);
+//            PrintWriter e = new PrintWriter(new FileWriter(new File( "/Users/wuxinyong/" + path +".json")));
+//            e.write(JSON.toJSONString(resultItems.getAll()));
+//            e.close();
+//        } catch (IOException var5) {
+//
+//        }
+//        System.out.println(JSON.toJSONString(resultItems.getAll()));
     }
 }

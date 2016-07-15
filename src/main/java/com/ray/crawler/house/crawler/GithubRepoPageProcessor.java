@@ -1,17 +1,11 @@
-package com.ray.crawler.house;
+package com.ray.crawler.house.crawler;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-/**
- * @Copyright (c) 2015, hunantv.com All Rights Reserved.
- * @author: wuxinyong@e.hunantv.com
- * @date: 16-7-4
- */
 public class GithubRepoPageProcessor implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(100).addHeader("X-Requested-With", "XMLHttpRequest").addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
