@@ -28,6 +28,10 @@ public class HousePageProcessor implements PageProcessor {
 	public void process(Page page) {
 		System.out.println(page.getRawText());
 		page.putField("content", page.getRawText());
+		page.putField("name", page.getHtml().xpath("//table//tr/td/text()").toString());
+		System.out.println(page.getHtml().toString());
+		System.out.println(page.getHtml().xpath("//td"));
+		System.out.println(new String(page.getResultItems().get("name")));
 	}
 
 	public Site getSite() {
