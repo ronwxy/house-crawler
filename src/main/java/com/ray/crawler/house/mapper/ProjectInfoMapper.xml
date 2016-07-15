@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ray.crawler.house.mapper.ProjectDetailInfoMapper">
+
+    <!-- 配置sqlMap -->
+    <resultMap id="projectInfoMap"
+               type="com.ray.crawler.house.domain.ProjectInfo">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="presell_no" property="presellNo" jdbcType="VARCHAR" />
+        <result column="certificate_date" property="certificateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="base_column_list">
+        id,project_name,address,presell_no,certificate_date
+    </sql>
+
+    <insert id="insert" parameterType="com.ray.crawler.house.domain.ProjectInfo">
+        <selectKey keyProperty="id" resultType="java.lang.Long"
+                   order="BEFORE">
+            SELECT nextval('t_project_id_seq') as id
+        </selectKey>
+        insert into t_consult_config(
+        <include refid="base_column_list" />
+        )values
+        (#{id,jdbcType=BIGINT},#{projectName,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},
+        #{presellNo,jdbcType=VARCHAR},#{certificateDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <select id="getAll" resultMap="projectInfoMap" >
+        select
+        <include refid="base_column_list" />
+        from t_project
+    </select>
+
+
+</mapper>

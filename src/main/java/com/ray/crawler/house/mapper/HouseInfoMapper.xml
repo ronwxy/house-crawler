@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ray.crawler.house.mapper.HouseInfoMapper">
+
+    <!-- 配置sqlMap -->
+    <resultMap id="HouseInfoMap"
+               type="com.ray.crawler.house.domain.HouseInfo">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="house_no" property="houseNo" jdbcType="VARCHAR" />
+        <result column="floor_no" property="floorNo" jdbcType="VARCHAR" />
+        <result column="house_use" property="houseUse" jdbcType="VARCHAR" />
+        <result column="house_type" property="houseType" jdbcType="VARCHAR" />
+        <result column="decorate" property="decorate" jdbcType="VARCHAR" />
+        <result column="building_area" property="buildingArea" jdbcType="DOUBLE" />
+        <result column="house_area" property="houseArea" jdbcType="DOUBLE" />
+        <result column="share_area" property="shareArea" jdbcType="DOUBLE" />
+        <result column="publish_price" property="publishPrice" jdbcType="DOUBLE" />
+        <result column="total_price" property="totalPrice" jdbcType="DOUBLE" />
+        <result column="sale_state" property="saleState" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="base_column_list">
+        id,house_no,floor_no,house_use,house_type,decorate,building_area,house_area,
+        share_area,publish_price,total_price,sale_state
+    </sql>
+
+    <insert id="insert" parameterType="com.ray.crawler.house.domain.HouseInfo">
+        <selectKey keyProperty="id" resultType="java.lang.Long"
+                   order="BEFORE">
+            SELECT nextval('t_house_id_seq') as id
+        </selectKey>
+        insert into t_consult_config(
+        <include refid="base_column_list" />
+        )values
+        (#{id,jdbcType=BIGINT},#{houseNo,jdbcType=VARCHAR},#{floorNo,jdbcType=VARCHAR},
+        #{houseUse,jdbcType=VARCHAR},#{houseType,jdbcType=VARCHAR},
+        #{decorate,jdbcType=VARCHAR},#{buildingArea,jdbcType=DOUBLE},
+        #{houseArea,jdbcType=DOUBLE},#{shareArea,jdbcType=DOUBLE},
+        #{publishPrice,jdbcType=DOUBLE},#{totalPrice,jdbcType=DOUBLE},#{saleState,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="getAll" resultMap="HouseInfoMap" >
+        select
+        <include refid="base_column_list" />
+        from t_house
+    </select>
+
+
+</mapper>

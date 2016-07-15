@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ray.crawler.house.mapper.BuildingInfoMapper">
+
+    <!-- 配置sqlMap -->
+    <resultMap id="buildingInfoMap"
+               type="com.ray.crawler.house.domain.BuildingInfo">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="presell_no" property="presellNo" jdbcType="VARCHAR" />
+        <result column="building_no" property="buildingNo" jdbcType="VARCHAR" />
+        <result column="certificate_date" property="certificateDate" jdbcType="TIMESTAMP" />
+        <result column="approve_sell_area" property="approveSellArea" jdbcType="DOUBLE" />
+        <result column="land_no" property="landNo" jdbcType="VARCHAR" />
+        <result column="project_approve_no" property="projectApproveNo" jdbcType="VARCHAR" />
+        <result column="land_approve_no" property="landApproveNo" jdbcType="VARCHAR" />
+        <result column="build_approve_no" property="buildApproveNo" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="base_column_list">
+        id,presell_no,building_no,certificate_date,approve_sell_area,land_no,project_approve_no,land_approve_no,
+        build_approve_no,code
+    </sql>
+
+    <insert id="insert" parameterType="com.ray.crawler.house.domain.BuildingInfo">
+        <selectKey keyProperty="id" resultType="java.lang.Long"
+                   order="BEFORE">
+            SELECT nextval('t_building_id_seq') as id
+        </selectKey>
+        insert into t_consult_config(
+        <include refid="base_column_list" />
+        )values
+        (#{id,jdbcType=BIGINT},#{presellNo,jdbcType=VARCHAR},#{buildingNo,jdbcType=VARCHAR},
+        #{certificateDate,jdbcType=TIMESTAMP},#{approveSellArea,jdbcType=DOUBLE},
+        #{landNo,jdbcType=VARCHAR},#{projectApproveNo,jdbcType=VARCHAR},
+        #{landApproveNo,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="getAll" resultMap="HouseInfoMap" >
+        select
+        <include refid="base_column_list" />
+        from t_house
+    </select>
+
+
+</mapper>
