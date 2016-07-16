@@ -1,6 +1,7 @@
 package com.ray.crawler.house.mapper;
 
 import com.ray.crawler.house.domain.BaseDomain;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
