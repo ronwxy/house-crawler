@@ -12,6 +12,7 @@ public class ProjectInfo extends BaseDomain{
     private String address;
     private String presellNo;
     private Date certificateDate;
+    private String detailUrl;
 
 
     public String getProjectName() {
@@ -45,4 +46,13 @@ public class ProjectInfo extends BaseDomain{
     public void setCertificateDate(Date certificateDate) {
         this.certificateDate = certificateDate;
     }
+
+	public String getDetailUrl() {
+		return detailUrl;
+	}
+
+	public void setDetailUrl(String detailUrl) {
+		this.detailUrl = detailUrl;
+	}
+    
 }

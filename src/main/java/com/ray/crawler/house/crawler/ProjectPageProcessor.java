@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Request;
@@ -14,7 +16,9 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.QueueScheduler;
 import us.codecraft.webmagic.utils.HttpConstant;
 
-public class HousePageProcessor implements PageProcessor {
+public class ProjectPageProcessor implements PageProcessor {
+	
+	private static AbstractApplicationContext ctx;
 
 	private Site site = Site
 			.me()
@@ -36,9 +40,10 @@ public class HousePageProcessor implements PageProcessor {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void main(String[] args) {
-		Spider spider = Spider.create(new HousePageProcessor());
-		Request[] requests = new Request[3];
-		for (int i = 1; i <= 3; i++) {
+		ctx = new ClassPathXmlApplicationContext(new String[] {"classpath:applicationContext.xml"});
+		Spider spider = Spider.create(new ProjectPageProcessor());
+		Request[] requests = new Request[307];
+		for (int i = 1; i <= 307; i++) {
 			Request request = new Request(
 					"http://szjw.changsha.gov.cn/index.php/home/Index/getnewslist/");
 			Map nameValuePair = new HashMap();
@@ -52,9 +57,11 @@ public class HousePageProcessor implements PageProcessor {
 		}
 		spider.setScheduler(new QueueScheduler().setDuplicateRemover(new LocalDuplicateRemover()));
 		spider.addRequest(requests);
-//		spider.addPipeline(new JsonFilePipeline("/Users/wuxinyong/house_crawler")).thread(5)
-//				.run();
-        spider.addPipeline(new LocalPipeline()).thread(5)
+        spider.addPipeline(new PageParsePipeline()).thread(5)
 				.run();
+	}
+	
+	public static AbstractApplicationContext getContext(){
+		return ctx;
 	}
 }

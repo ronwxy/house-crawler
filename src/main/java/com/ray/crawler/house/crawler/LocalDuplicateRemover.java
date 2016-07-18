@@ -15,7 +15,7 @@ public class LocalDuplicateRemover implements DuplicateRemover{
 	public boolean isDuplicate(Request request, Task task) {
 		NameValuePair[] nameValuePairs = (NameValuePair[]) request.getExtra("nameValuePair");
 		NameValuePair value = nameValuePairs[1];
-		System.out.println("value: " + value);
+		System.out.println("handle page=====:  " + value);
 		return false;
 	}
 

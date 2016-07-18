@@ -37,7 +37,7 @@
         )
     </insert>
 
-    <select id="getAll" resultMap="HouseInfoMap" >
+    <select id="getAll" resultMap="buildingInfoMap" >
         select
         <include refid="base_column_list" />
         from t_house

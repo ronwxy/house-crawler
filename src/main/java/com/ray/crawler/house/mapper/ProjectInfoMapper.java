@@ -1,6 +1,9 @@
 package com.ray.crawler.house.mapper;
 
+import java.util.List;
+
 import com.ray.crawler.house.domain.ProjectInfo;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ProjectInfoMapper extends GenericeMapper<ProjectInfo> {
+	
+	public List<String> getProjectDetailUrls();
 }
