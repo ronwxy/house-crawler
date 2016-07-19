@@ -2,67 +2,79 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ray.crawler.house.mapper.ProjectDetailInfoMapper">
 
-    <!-- 配置sqlMap -->
-    <resultMap id="projectDetailInfoMap"
-               type="com.ray.crawler.house.domain.ProjectDetailInfo">
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="project_name" property="projectName" jdbcType="VARCHAR" />
-        <result column="area" property="area" jdbcType="VARCHAR" />
-        <result column="approval_no" property="startTime" jdbcType="VARCHAR" />
-        <result column="company" property="endTime" jdbcType="VARCHAR" />
-        <result column="building_num" property="limitNum" jdbcType="INTEGER" />
-        <result column="project_address" property="createTime" jdbcType="VARCHAR" />
-        <result column="min_price" property="updateTime" jdbcType="DOUBLE" />
-        <result column="sell_address" property="updateTime" jdbcType="VARCHAR" />
-        <result column="sell_phone" property="updateTime" jdbcType="VARCHAR" />
-        <result column="house_num" property="updateTime" jdbcType="INTEGER" />
-        <result column="bus" property="updateTime" jdbcType="VARCHAR" />
-        <result column="total_area" property="updateTime" jdbcType="DOUBLE" />
-        <result column="design_company" property="updateTime" jdbcType="VARCHAR" />
-        <result column="total_building_area" property="updateTime" jdbcType="DOUBLE" />
-        <result column="sell_proxy" property="updateTime" jdbcType="VARCHAR" />
-        <result column="size_rate" property="updateTime" jdbcType="DOUBLE" />
-        <result column="property_company" property="updateTime" jdbcType="VARCHAR" />
-        <result column="green_rate" property="updateTime" jdbcType="DOUBLE" />
-        <result column="build_company" property="updateTime" jdbcType="VARCHAR" />
-        <result column="property_price" property="updateTime" jdbcType="DOUBLE" />
-        <result column="finish_date" property="updateTime" jdbcType="DOUBLE" />
-        <result column="project_summary" property="updateTime" jdbcType="VARCHAR" />
-    </resultMap>
+	<!-- 配置sqlMap -->
+	<resultMap id="projectDetailInfoMap"
+		type="com.ray.crawler.house.domain.ProjectDetailInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="project_name" property="projectName" jdbcType="VARCHAR" />
+		<result column="approve_sell_num" property="approveSellNum"
+			jdbcType="INTEGER" />
+		<result column="available_sell_num" property="availableSellNum"
+			jdbcType="INTEGER" />
+		<result column="public_min_price" property="publicMinPrice"
+			jdbcType="DOUBLE" />
+		<result column="public_max_price" property="publicMaxPrice"
+			jdbcType="DOUBLE" />
+		<result column="area" property="area" jdbcType="VARCHAR" />
+		<result column="approve_no" property="approveNo" jdbcType="VARCHAR" />
+		<result column="company" property="company" jdbcType="VARCHAR" />
+		<result column="building_num" property="buildingNum" jdbcType="INTEGER" />
+		<result column="project_address" property="projectAddress"
+			jdbcType="VARCHAR" />
+		<result column="min_price" property="minPrice" jdbcType="DOUBLE" />
+		<result column="sell_address" property="sellAddress" jdbcType="VARCHAR" />
+		<result column="sell_phone" property="sellPhone" jdbcType="VARCHAR" />
+		<result column="house_num" property="houseNum" jdbcType="INTEGER" />
+		<result column="bus" property="bus" jdbcType="VARCHAR" />
+		<result column="total_area" property="totalArea" jdbcType="DOUBLE" />
+		<result column="design_company" property="designCompany"
+			jdbcType="VARCHAR" />
+		<result column="total_building_area" property="totalBuildingArea"
+			jdbcType="DOUBLE" />
+		<result column="sell_proxy" property="sellProxy" jdbcType="VARCHAR" />
+		<result column="size_rate" property="sizeRate" jdbcType="DOUBLE" />
+		<result column="property_company" property="propertyCompany"
+			jdbcType="VARCHAR" />
+		<result column="green_rate" property="greenRate" jdbcType="DOUBLE" />
+		<result column="build_company" property="buildCompany"
+			jdbcType="VARCHAR" />
+		<result column="property_price" property="propertyPrice"
+			jdbcType="DOUBLE" />
+		<result column="finish_date" property="finishDate" jdbcType="DOUBLE" />
+		<result column="project_summary" property="projectSummary"
+			jdbcType="VARCHAR" />
+	</resultMap>
 
-    <sql id="base_column_list">
-        id,project_name,area,approval_no,company,building_num,project_address,min_price,sell_address,sell_phone,
-        house_num,bus,total_area,design_company,total_building_area,sell_proxy,size_rate,property_company,green_rate,
-        build_company,property_price,finish_date,project_summary
-    </sql>
+	<sql id="base_column_list">
+		project_name,approve_sell_num,available_sell_num,public_min_price,public_max_price,area,approve_no,company,building_num,project_address,min_price,sell_address,sell_phone,
+		house_num,bus,total_area,design_company,total_building_area,sell_proxy,size_rate,property_company,green_rate,
+		build_company,property_price,finish_date,project_summary
+	</sql>
 
-    <insert id="insert" parameterType="com.ray.crawler.house.domain.ProjectDetailInfo">
-        <selectKey keyProperty="id" resultType="java.lang.Long"
-                   order="BEFORE">
-            SELECT nextval('t_project_detail_id_seq') as id
-        </selectKey>
-        insert into t_consult_config(
-        <include refid="base_column_list" />
-        )values
-        (#{id,jdbcType=BIGINT},#{projectName,jdbcType=VARCHAR},#{area,jdbcType=VARCHAR},
-        #{approvalNo,jdbcType=VARCHAR},#{company,jdbcType=VARCHAR},
-        #{buildingNum,jdbcType=INTEGER},
-        #{projectAddress,jdbcType=VARCHAR},#{minPrice,jdbcType=DOUBLE},#{sellAddress,jdbcType=VARCHAR},
-        #{sellPhone,jdbcType=VARCHAR},#{houseNum,jdbcType=INTEGER},
-        #{totalArea,jdbcType=DOUBLE},#{designCompany,jdbcType=VARCHAR},
-        #{totalBuildingArea,jdbcType=DOUBLE},#{sellProxy,jdbcType=VARCHAR},
-        #{sizeRate,jdbcType=DOUBLE},#{propertyCompany,jdbcType=VARCHAR},
-        #{greenRate,jdbcType=DOUBLE},#{buildCompany,jdbcType=VARCHAR},
-        #{propertyPrice,jdbcType=DOUBLE},#{finishDate,jdbcType=TIMESTAMP},
-        #{projectSummary,jdbcType=VARCHAR}
-        )
-    </insert>
+	<insert id="insert" parameterType="com.ray.crawler.house.domain.ProjectDetailInfo">
+		insert into t_project_detail(
+		<include refid="base_column_list" />
+		)values
+		(#{projectName,jdbcType=VARCHAR},#{approveSellNum,jdbcType=INTEGER},#{availableSellNum,jdbcType=INTEGER},
+		#{publicMinPrice,jdbcType=DOUBLE},#{publicMaxPrice,jdbcType=DOUBLE},#{area,jdbcType=VARCHAR},
+		#{approveNo,jdbcType=VARCHAR},#{company,jdbcType=VARCHAR},
+		#{buildingNum,jdbcType=INTEGER},
+		#{projectAddress,jdbcType=VARCHAR},#{minPrice,jdbcType=DOUBLE},#{sellAddress,jdbcType=VARCHAR},
+		#{sellPhone,jdbcType=VARCHAR},#{houseNum,jdbcType=INTEGER},#{bus,jdbcType=VARCHAR},
+		#{totalArea,jdbcType=DOUBLE},#{designCompany,jdbcType=VARCHAR},
+		#{totalBuildingArea,jdbcType=DOUBLE},#{sellProxy,jdbcType=VARCHAR},
+		#{sizeRate,jdbcType=DOUBLE},#{propertyCompany,jdbcType=VARCHAR},
+		#{greenRate,jdbcType=DOUBLE},#{buildCompany,jdbcType=VARCHAR},
+		#{propertyPrice,jdbcType=DOUBLE},#{finishDate,jdbcType=TIMESTAMP},
+		#{projectSummary,jdbcType=VARCHAR}
+		)
+	</insert>
 
-    <select id="getAll" resultMap="projectDetailInfoMap" >
-        select
-        <include refid="base_column_list" />
-        from t_project_detail
-    </select>
+	<select id="getAll" resultMap="projectDetailInfoMap">
+		select id,
+		<include refid="base_column_list" />
+		from t_project_detail
+	</select>
 
 
 </mapper>

@@ -6,6 +6,7 @@
     <resultMap id="buildingInfoMap"
                type="com.ray.crawler.house.domain.BuildingInfo">
         <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="project_name" property="projectName" jdbcType="VARCHAR" />
         <result column="presell_no" property="presellNo" jdbcType="VARCHAR" />
         <result column="building_no" property="buildingNo" jdbcType="VARCHAR" />
         <result column="certificate_date" property="certificateDate" jdbcType="TIMESTAMP" />
@@ -18,29 +19,25 @@
     </resultMap>
 
     <sql id="base_column_list">
-        id,presell_no,building_no,certificate_date,approve_sell_area,land_no,project_approve_no,land_approve_no,
+        project_name,presell_no,building_no,certificate_date,approve_sell_area,land_no,project_approve_no,land_approve_no,
         build_approve_no,code
     </sql>
 
     <insert id="insert" parameterType="com.ray.crawler.house.domain.BuildingInfo">
-        <selectKey keyProperty="id" resultType="java.lang.Long"
-                   order="BEFORE">
-            SELECT nextval('t_building_id_seq') as id
-        </selectKey>
-        insert into t_consult_config(
+        insert into t_building(
         <include refid="base_column_list" />
         )values
-        (#{id,jdbcType=BIGINT},#{presellNo,jdbcType=VARCHAR},#{buildingNo,jdbcType=VARCHAR},
+        (#{projectName,jdbcType=VARCHAR},#{presellNo,jdbcType=VARCHAR},#{buildingNo,jdbcType=VARCHAR},
         #{certificateDate,jdbcType=TIMESTAMP},#{approveSellArea,jdbcType=DOUBLE},
         #{landNo,jdbcType=VARCHAR},#{projectApproveNo,jdbcType=VARCHAR},
-        #{landApproveNo,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR}
+        #{landApproveNo,jdbcType=VARCHAR},#{buildApproveNo,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR}
         )
     </insert>
 
     <select id="getAll" resultMap="buildingInfoMap" >
-        select
+        select id,
         <include refid="base_column_list" />
-        from t_house
+        from t_building
     </select>
 
 

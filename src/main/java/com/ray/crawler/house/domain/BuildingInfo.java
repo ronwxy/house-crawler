@@ -8,6 +8,7 @@ import java.util.Date;
 public class BuildingInfo extends BaseDomain {
 
     private static final long serialVersionUID = 2176786695143534716L;
+    private String projectName;
     private String presellNo;
     private String buildingNo;
     private Date certificateDate;
@@ -18,7 +19,16 @@ public class BuildingInfo extends BaseDomain {
     private String buildApproveNo;
     private String code;
 
-    public String getPresellNo() {
+    
+    public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getPresellNo() {
         return presellNo;
     }
 

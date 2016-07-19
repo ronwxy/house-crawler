@@ -9,12 +9,16 @@ public class ProjectDetailInfo extends BaseDomain {
 
     private static final long serialVersionUID = -9221213283825045950L;
     private String projectName;
+    private Integer approveSellNum;
+    private Integer availableSellNum;
+    private Double publicMinPrice;
+    private Double publicMaxPrice;
     private String area;
     private String approveNo;
     private String company;
     private Integer buildingNum;
     private String projectAddress;
-    private Double min_price; //销售起价
+    private Double minPrice; //销售起价
     private String sellAddress;
     private String sellPhone;
     private Integer houseNum;
@@ -26,7 +30,7 @@ public class ProjectDetailInfo extends BaseDomain {
     private Double sizeRate;
     private String propertyCompany;
     private Double greenRate;
-    private String buildingCompany;
+    private String buildCompany;
     private Double propertyPrice;
     private Date finishDate;
     private String projectSummary;
@@ -38,8 +42,40 @@ public class ProjectDetailInfo extends BaseDomain {
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
+    
+    public Integer getApproveSellNum() {
+		return approveSellNum;
+	}
 
-    public String getArea() {
+	public void setApproveSellNum(Integer approveSellNum) {
+		this.approveSellNum = approveSellNum;
+	}
+
+	public Integer getAvailableSellNum() {
+		return availableSellNum;
+	}
+
+	public void setAvailableSellNum(Integer availableSellNum) {
+		this.availableSellNum = availableSellNum;
+	}
+
+	public Double getPublicMinPrice() {
+		return publicMinPrice;
+	}
+
+	public void setPublicMinPrice(Double publicMinPrice) {
+		this.publicMinPrice = publicMinPrice;
+	}
+
+	public Double getPublicMaxPrice() {
+		return publicMaxPrice;
+	}
+
+	public void setPublicMaxPrice(Double publicMaxPrice) {
+		this.publicMaxPrice = publicMaxPrice;
+	}
+
+	public String getArea() {
         return area;
     }
 
@@ -78,16 +114,16 @@ public class ProjectDetailInfo extends BaseDomain {
     public void setProjectAddress(String projectAddress) {
         this.projectAddress = projectAddress;
     }
+    
+    public Double getMinPrice() {
+		return minPrice;
+	}
 
-    public Double getMin_price() {
-        return min_price;
-    }
+	public void setMinPrice(Double minPrice) {
+		this.minPrice = minPrice;
+	}
 
-    public void setMin_price(Double min_price) {
-        this.min_price = min_price;
-    }
-
-    public String getSellAddress() {
+	public String getSellAddress() {
         return sellAddress;
     }
 
@@ -175,15 +211,15 @@ public class ProjectDetailInfo extends BaseDomain {
         this.greenRate = greenRate;
     }
 
-    public String getBuildingCompany() {
-        return buildingCompany;
-    }
+    public String getBuildCompany() {
+		return buildCompany;
+	}
 
-    public void setBuildingCompany(String buildingCompany) {
-        this.buildingCompany = buildingCompany;
-    }
+	public void setBuildCompany(String buildCompany) {
+		this.buildCompany = buildCompany;
+	}
 
-    public Double getPropertyPrice() {
+	public Double getPropertyPrice() {
         return propertyPrice;
     }
 
