@@ -6,8 +6,8 @@ package com.ray.crawler.house.domain;
 public class HouseInfo extends BaseDomain {
 
     private static final long serialVersionUID = -5761467766914797991L;
-    private Integer houseNo;
-    private Integer floorNo;
+    private String houseNo;
+    private String floorNo;
     private String houseUse;
     private String houseType;
     private String decorate;
@@ -17,20 +17,21 @@ public class HouseInfo extends BaseDomain {
     private Double publishPrice;
     private Double totalPrice;
     private String saleState;
+    private String code;
 
-    public Integer getHouseNo() {
+    public String getHouseNo() {
         return houseNo;
     }
 
-    public void setHouseNo(Integer houseNo) {
+    public void setHouseNo(String houseNo) {
         this.houseNo = houseNo;
     }
 
-    public Integer getFloorNo() {
+    public String getFloorNo() {
         return floorNo;
     }
 
-    public void setFloorNo(Integer floorNo) {
+    public void setFloorNo(String floorNo) {
         this.floorNo = floorNo;
     }
 
@@ -105,4 +106,13 @@ public class HouseInfo extends BaseDomain {
     public void setSaleState(String saleState) {
         this.saleState = saleState;
     }
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+    
 }

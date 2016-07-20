@@ -17,31 +17,29 @@
         <result column="publish_price" property="publishPrice" jdbcType="DOUBLE"/>
         <result column="total_price" property="totalPrice" jdbcType="DOUBLE"/>
         <result column="sale_state" property="saleState" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="base_column_list">
-    id,house_no,floor_no,house_use,house_type,decorate,building_area,house_area,
-    share_area,publish_price,total_price,sale_state
+    house_no,floor_no,house_use,house_type,decorate,building_area,house_area,
+    share_area,publish_price,total_price,sale_state,code
 </sql>
 
     <insert id="insert" parameterType="com.ray.crawler.house.domain.HouseInfo">
-        <selectKey keyProperty="id" resultType="java.lang.Long"
-                   order="BEFORE">
-            SELECT nextval('t_house_id_seq') as id
-        </selectKey>
         insert into t_house(
         <include refid="base_column_list"/>
         )values
-        (#{id,jdbcType=BIGINT},#{houseNo,jdbcType=VARCHAR},#{floorNo,jdbcType=VARCHAR},
+        (#{houseNo,jdbcType=VARCHAR},#{floorNo,jdbcType=VARCHAR},
         #{houseUse,jdbcType=VARCHAR},#{houseType,jdbcType=VARCHAR},
         #{decorate,jdbcType=VARCHAR},#{buildingArea,jdbcType=DOUBLE},
         #{houseArea,jdbcType=DOUBLE},#{shareArea,jdbcType=DOUBLE},
-        #{publishPrice,jdbcType=DOUBLE},#{totalPrice,jdbcType=DOUBLE},#{saleState,jdbcType=VARCHAR}
+        #{publishPrice,jdbcType=DOUBLE},#{totalPrice,jdbcType=DOUBLE},#{saleState,jdbcType=VARCHAR},
+        #{code,jdbcType=VARCHAR}
         )
     </insert>
 
     <select id="getAll" resultMap="houseInfoMap">
-        select
+        select id,
         <include refid="base_column_list"/>
         from t_house
     </select>
